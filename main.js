@@ -5,13 +5,13 @@ const rp = require('request-promise')
 const callAPI = async (name) => {
   let data = ''
   try {
-    const str = await rp('https://cloud.culture.tw/frontsite/trans/SearchShowAction.do?method=doFindTypeJ&category=6')
+    const str = await rp('http://data.coa.gov.tw/Service/OpenData/ODwsv/ODwsvTravelFood.aspx')
     let json = JSON.parse(str)
     json = json.filter(j => {
-      return j.sourceWebName === name
+      return j.Name === name
     })
     if (json.length === 0) data = '找不到資料'
-    else data = json[0]
+    else data = json[0].PicURL
   } catch (error) {
     // console.log(error.message)
     data = '發生錯誤'
